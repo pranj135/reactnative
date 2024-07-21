@@ -1,0 +1,61 @@
+// src/screens/ProfileScreen.js
+import React from 'react';
+import { View, Text, Image, ScrollView, StyleSheet } from 'react-native';
+
+const dummyPosts = [
+  { id: 1, image: 'https://via.placeholder.com/300' },
+  { id: 2, image: 'https://via.placeholder.com/300' },
+];
+
+const ProfileScreen = ({ route }) => {
+  const { username } = route.params;
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.topSection}>
+        <Image source={{ uri: 'https://via.placeholder.com/100' }} style={styles.profileImage} />
+        <Text>{username}</Text>
+        <Text>Followers: 100</Text>
+        <Text>Following: 50</Text>
+      </View>
+      <View style={styles.secondSection}>
+        <Text>Posts: {dummyPosts.length}</Text>
+      </View>
+      <ScrollView horizontal style={styles.thirdSection}>
+        {dummyPosts.map(post => (
+          <Image key={post.id} source={{ uri: post.image }} style={styles.postImage} />
+        ))}
+      </ScrollView>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  topSection: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  profileImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 10,
+  },
+  secondSection: {
+    marginBottom: 20,
+  },
+  thirdSection: {
+    flexDirection: 'row',
+  },
+  postImage: {
+    width: 100,
+    height: 100,
+    marginRight: 10,
+  },
+});
+
+export default ProfileScreen;
